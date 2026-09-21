@@ -1,0 +1,783 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lashes with Mori | תוספות ריסים</title>
+<meta name="description" content="Lashes with Mori — תוספות ריסים, ליפטינג וטיפוח מבט. קביעת תור מהירה בוואטסאפ.">
+<meta name="theme-color" content="#ff7fb0">
+<meta property="og:title" content="Lashes with Mori">
+<meta property="og:description" content="תוספות ריסים שמחמיאות למבט שלך ✨">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👁️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Suez+One&family=Parisienne&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pink-50:#fff6f9; --pink-100:#ffe9f1; --pink-150:#ffdde9; --pink-200:#ffc9dd;
+  --pink-300:#ffa8c9; --pink-400:#ff85b3; --pink-500:#f4609a; --rose:#e0447f;
+  --plum:#5f2440; --plum-soft:#8a5470; --gold:#d9a273; --cream:#fffaf6;
+  --ink:#4a2036;
+  --shadow-sm:0 4px 14px rgba(224,68,127,.10);
+  --shadow-md:0 12px 34px rgba(224,68,127,.16);
+  --shadow-lg:0 26px 60px rgba(224,68,127,.22);
+  --r:26px;
+  --font:'Heebo',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --display:'Suez One',Georgia,serif;
+  --script:'Parisienne',cursive;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family:var(--font); color:var(--ink); background:var(--pink-50);
+  overflow-x:hidden; line-height:1.75; -webkit-font-smoothing:antialiased;
+}
+body.locked{overflow:hidden}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:inherit}
+h1,h2,h3{font-family:var(--display); font-weight:400; line-height:1.25; margin:0}
+p{margin:0}
+button{font-family:inherit}
+
+/* ---------- decorative background ---------- */
+.bg-wash{position:fixed; inset:0; z-index:-2; pointer-events:none;
+  background:
+    radial-gradient(900px 620px at 88% -8%, #ffd9e8 0%, transparent 60%),
+    radial-gradient(760px 560px at 6% 18%, #ffe7f0 0%, transparent 62%),
+    radial-gradient(900px 700px at 50% 108%, #ffe0ec 0%, transparent 60%),
+    linear-gradient(180deg,#fff9fb 0%, #fff6f9 100%);
+}
+.bg-dots{position:fixed; inset:0; z-index:-1; pointer-events:none; opacity:.5;
+  background-image:radial-gradient(rgba(255,168,201,.45) 1.2px, transparent 1.3px);
+  background-size:26px 26px;
+  -webkit-mask-image:radial-gradient(70% 60% at 50% 40%, #000 0%, transparent 100%);
+  mask-image:radial-gradient(70% 60% at 50% 40%, #000 0%, transparent 100%);
+}
+
+/* ---------- floating stickers ---------- */
+.stickers{position:fixed; inset:0; pointer-events:none; z-index:1; overflow:hidden}
+.sticker{position:absolute; font-size:26px; opacity:.55; filter:drop-shadow(0 6px 10px rgba(224,68,127,.2));
+  animation:float var(--d,13s) ease-in-out infinite; animation-delay:var(--dl,0s)}
+@keyframes float{
+  0%,100%{transform:translateY(0) rotate(0deg)}
+  33%{transform:translateY(-22px) rotate(9deg)}
+  66%{transform:translateY(12px) rotate(-7deg)}
+}
+
+/* ---------- intro ---------- */
+#intro{position:fixed; inset:0; z-index:200; display:grid; place-items:center;
+  background:linear-gradient(160deg,#ffd7e7 0%, #ffc2da 45%, #ffb1cf 100%);
+  transition:opacity .8s ease, visibility .8s}
+#intro.done{opacity:0; visibility:hidden}
+.intro-inner{text-align:center; padding:24px}
+.intro-eye{width:min(78vw,340px); margin-inline:auto; filter:drop-shadow(0 16px 30px rgba(224,68,127,.28))}
+.intro-eye .lid-top{stroke-dasharray:420; stroke-dashoffset:420; animation:draw 1.1s .15s ease forwards}
+.intro-eye .lid-bot{stroke-dasharray:380; stroke-dashoffset:380; animation:draw 1s .3s ease forwards}
+.intro-eye .iris{opacity:0; transform-origin:center; animation:pop .6s .95s cubic-bezier(.34,1.56,.64,1) forwards}
+.intro-eye .lash{stroke-dasharray:70; stroke-dashoffset:70; animation:draw .5s ease forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes pop{0%{opacity:0;transform:scale(.4)}100%{opacity:1;transform:scale(1)}}
+.intro-title{font-family:var(--script); font-size:clamp(44px,11vw,84px); color:#fff; margin-top:6px;
+  text-shadow:0 8px 24px rgba(190,50,110,.35); opacity:0; animation:riseIn .9s 1.5s ease forwards}
+.intro-sub{font-size:clamp(13px,3.4vw,17px); letter-spacing:.34em; color:#7d2b53; font-weight:500;
+  opacity:0; animation:riseIn .9s 1.85s ease forwards}
+.intro-skip{margin-top:30px; background:rgba(255,255,255,.55); border:1px solid rgba(255,255,255,.9);
+  color:#7d2b53; padding:9px 22px; border-radius:99px; font-size:13px; font-weight:500; cursor:pointer;
+  opacity:0; animation:riseIn .8s 2.3s ease forwards; backdrop-filter:blur(6px)}
+.intro-skip:hover{background:#fff}
+@keyframes riseIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+/* ---------- nav ---------- */
+header.nav{position:sticky; top:0; z-index:60; backdrop-filter:blur(14px);
+  background:rgba(255,246,249,.82); border-bottom:1px solid rgba(255,168,201,.35)}
+.nav-in{max-width:1120px; margin:auto; padding:12px 20px; display:flex; align-items:center; gap:18px}
+.brand{font-family:var(--script); font-size:27px; color:var(--rose); line-height:1; white-space:nowrap}
+.brand small{display:block; font-family:var(--font); font-size:9.5px; letter-spacing:.3em; color:var(--plum-soft)}
+.nav-links{display:flex; gap:22px; margin-inline-start:auto; font-size:15px; font-weight:500}
+.nav-links a{text-decoration:none; color:var(--plum); position:relative; padding:4px 0}
+.nav-links a::after{content:""; position:absolute; inset-inline-start:0; bottom:0; height:2px; width:0;
+  background:var(--pink-400); border-radius:2px; transition:width .3s}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:linear-gradient(135deg,var(--pink-400),var(--rose)); color:#fff; text-decoration:none;
+  padding:9px 20px; border-radius:99px; font-size:14px; font-weight:700; box-shadow:var(--shadow-sm); white-space:nowrap}
+.nav-cta:hover{transform:translateY(-2px); box-shadow:var(--shadow-md)}
+.nav-cta{transition:.25s}
+@media(max-width:820px){.nav-links{display:none} .nav-cta{margin-inline-start:auto}}
+
+/* ---------- layout ---------- */
+.wrap{max-width:1120px; margin:auto; padding-inline:20px}
+section{padding:86px 0; position:relative; z-index:2}
+.eyebrow{display:inline-flex; align-items:center; gap:8px; background:#fff; color:var(--rose);
+  border:1px solid var(--pink-200); padding:6px 16px; border-radius:99px; font-size:13px; font-weight:700;
+  letter-spacing:.06em; box-shadow:var(--shadow-sm)}
+.sec-title{font-size:clamp(30px,5.2vw,46px); color:var(--plum); margin:16px 0 12px}
+.sec-sub{color:var(--plum-soft); max-width:56ch; font-size:17px}
+.center{text-align:center} .center .sec-sub{margin-inline:auto}
+
+/* ---------- hero ---------- */
+.hero{padding:70px 0 60px}
+.hero-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:48px; align-items:center}
+.hero h1{font-size:clamp(40px,8vw,74px); color:var(--plum); margin:18px 0 0}
+.hero h1 .script{font-family:var(--script); color:var(--rose); font-size:1.24em; display:block; line-height:.95}
+.hero p.lead{margin-top:20px; font-size:18.5px; color:var(--plum-soft); max-width:46ch}
+.hero-cta{display:flex; gap:14px; flex-wrap:wrap; margin-top:30px}
+.btn{display:inline-flex; align-items:center; gap:9px; border:0; cursor:pointer; text-decoration:none;
+  padding:15px 30px; border-radius:99px; font-size:16px; font-weight:700; transition:.28s}
+.btn-primary{background:linear-gradient(135deg,var(--pink-400),var(--rose)); color:#fff; box-shadow:var(--shadow-md)}
+.btn-primary:hover{transform:translateY(-3px); box-shadow:var(--shadow-lg)}
+.btn-ghost{background:#fff; color:var(--rose); border:1.5px solid var(--pink-200); box-shadow:var(--shadow-sm)}
+.btn-ghost:hover{background:var(--pink-50); transform:translateY(-3px)}
+.btn-wa{background:linear-gradient(135deg,#34d178,#17a35a); color:#fff; box-shadow:0 12px 30px rgba(23,163,90,.28)}
+.btn-wa:hover{transform:translateY(-3px)}
+.hero-stats{display:flex; gap:30px; margin-top:36px; flex-wrap:wrap}
+.stat b{display:block; font-family:var(--display); font-size:30px; color:var(--rose); line-height:1}
+.stat span{font-size:13.5px; color:var(--plum-soft)}
+.hero-art{position:relative}
+.hero-card{background:linear-gradient(150deg,#fff,#fff2f7); border:1px solid var(--pink-150);
+  border-radius:38px; padding:26px; box-shadow:var(--shadow-lg); animation:bob 7s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.hero-card .cap{text-align:center; margin-top:10px; font-size:14px; color:var(--plum-soft); font-weight:500}
+.badge-float{position:absolute; background:#fff; border-radius:20px; padding:11px 17px; box-shadow:var(--shadow-md);
+  font-size:13.5px; font-weight:700; color:var(--plum); display:flex; align-items:center; gap:8px;
+  border:1px solid var(--pink-150)}
+.badge-1{top:-16px; inset-inline-start:-10px; animation:bob 6s ease-in-out infinite .4s}
+.badge-2{bottom:22px; inset-inline-end:-14px; animation:bob 6.6s ease-in-out infinite 1.1s}
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr; gap:34px}
+  .hero-art{order:-1; max-width:430px; margin-inline:auto}
+  .badge-1{inset-inline-start:0} .badge-2{inset-inline-end:0}
+}
+
+/* ---------- marquee ---------- */
+.marquee{overflow:hidden; background:linear-gradient(90deg,var(--pink-400),var(--rose),var(--pink-400));
+  padding:13px 0; z-index:2; position:relative}
+.marquee-track{display:flex; gap:44px; width:max-content; animation:slide 26s linear infinite}
+.marquee span{color:#fff; font-size:15px; font-weight:700; letter-spacing:.05em; white-space:nowrap}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(50%)}}
+
+/* ---------- cards ---------- */
+.grid{display:grid; gap:24px; margin-top:44px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:940px){.g3{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.g3,.g2{grid-template-columns:1fr}}
+.card{background:#fff; border:1px solid var(--pink-150); border-radius:var(--r); padding:22px;
+  box-shadow:var(--shadow-sm); transition:.35s; position:relative; overflow:hidden}
+.card:hover{transform:translateY(-8px); box-shadow:var(--shadow-lg); border-color:var(--pink-300)}
+.card .sticker-tag{position:absolute; top:12px; inset-inline-end:14px; font-size:20px; opacity:.8}
+.lash-art{background:linear-gradient(160deg,var(--pink-100),#fff); border-radius:20px; padding:12px 8px}
+.card h3{font-size:21px; color:var(--plum); margin-top:16px}
+.card p{font-size:15px; color:var(--plum-soft); margin-top:8px}
+.meta{display:flex; align-items:center; justify-content:space-between; margin-top:16px;
+  padding-top:14px; border-top:1px dashed var(--pink-200)}
+.price{font-family:var(--display); font-size:22px; color:var(--rose)}
+.dur{font-size:13px; color:var(--plum-soft); background:var(--pink-100); padding:4px 12px; border-radius:99px}
+
+/* gallery */
+.gal{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:44px}
+@media(max-width:940px){.gal{grid-template-columns:repeat(2,1fr)}}
+.gal figure{margin:0; background:#fff; border:1px solid var(--pink-150); border-radius:22px; padding:10px;
+  box-shadow:var(--shadow-sm); transition:.35s}
+.gal figure:hover{transform:translateY(-6px) rotate(-1.2deg); box-shadow:var(--shadow-md)}
+.gal figcaption{text-align:center; font-size:14px; font-weight:700; color:var(--plum); padding:10px 4px 4px}
+
+/* about */
+.about{display:grid; grid-template-columns:.9fr 1.1fr; gap:50px; align-items:center}
+@media(max-width:900px){.about{grid-template-columns:1fr}}
+.about-card{background:linear-gradient(150deg,#fff,var(--pink-100)); border:1px solid var(--pink-150);
+  border-radius:34px; padding:30px; box-shadow:var(--shadow-md); text-align:center}
+.avatar{width:120px; height:120px; border-radius:50%; margin:0 auto 14px; display:grid; place-items:center;
+  font-size:54px; background:linear-gradient(140deg,var(--pink-200),var(--pink-400));
+  box-shadow:0 14px 30px rgba(224,68,127,.28)}
+.ticks{list-style:none; padding:0; margin:22px 0 0; display:grid; gap:12px}
+.ticks li{display:flex; gap:11px; align-items:flex-start; font-size:16px; color:var(--plum-soft)}
+.ticks i{font-style:normal; flex:0 0 26px; height:26px; border-radius:50%; background:var(--pink-100);
+  display:grid; place-items:center; font-size:14px}
+
+/* booking */
+.book{background:linear-gradient(160deg,#fff 0%, var(--pink-100) 100%); border:1px solid var(--pink-150);
+  border-radius:38px; padding:clamp(24px,4vw,46px); box-shadow:var(--shadow-lg); margin-top:40px}
+.form-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+@media(max-width:700px){.form-grid{grid-template-columns:1fr}}
+.field{display:flex; flex-direction:column; gap:7px}
+.field.full{grid-column:1/-1}
+label{font-size:14.5px; font-weight:700; color:var(--plum)}
+input,select,textarea{font-family:inherit; font-size:16px; color:var(--ink); background:#fff;
+  border:1.5px solid var(--pink-200); border-radius:16px; padding:13px 15px; transition:.22s; width:100%}
+input:focus,select:focus,textarea:focus{outline:0; border-color:var(--pink-400); box-shadow:0 0 0 4px rgba(255,168,201,.32)}
+textarea{resize:vertical; min-height:92px}
+.chiprow{display:flex; flex-wrap:wrap; gap:9px}
+.chip{border:1.5px solid var(--pink-200); background:#fff; color:var(--plum); border-radius:99px;
+  padding:9px 17px; font-size:14.5px; font-weight:500; cursor:pointer; transition:.22s}
+.chip:hover{border-color:var(--pink-400)}
+.chip.on{background:linear-gradient(135deg,var(--pink-400),var(--rose)); color:#fff; border-color:transparent;
+  box-shadow:var(--shadow-sm)}
+.form-foot{display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:24px}
+.note{font-size:13.5px; color:var(--plum-soft)}
+.err{color:#c0275f; font-size:13.5px; font-weight:500}
+
+/* testimonials */
+.quote{background:#fff; border:1px solid var(--pink-150); border-radius:var(--r); padding:26px;
+  box-shadow:var(--shadow-sm); position:relative}
+.quote::before{content:"”"; position:absolute; top:-6px; inset-inline-start:20px; font-family:var(--display);
+  font-size:70px; color:var(--pink-200); line-height:1}
+.quote p{font-size:16px; color:var(--plum-soft); position:relative}
+.who{margin-top:16px; font-weight:700; color:var(--plum); font-size:15px}
+.stars{color:var(--gold); letter-spacing:3px; font-size:15px}
+
+/* faq */
+details{background:#fff; border:1px solid var(--pink-150); border-radius:20px; padding:4px 20px;
+  box-shadow:var(--shadow-sm); margin-top:14px}
+summary{cursor:pointer; font-weight:700; color:var(--plum); padding:16px 0; list-style:none; font-size:16.5px;
+  display:flex; justify-content:space-between; gap:14px; align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+"; color:var(--rose); font-size:24px; font-weight:400; transition:.25s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 0 18px; color:var(--plum-soft); font-size:15.5px}
+
+/* footer */
+footer{background:linear-gradient(160deg,var(--plum),#3f1529); color:#ffdfec; padding:56px 0 30px;
+  position:relative; z-index:2; margin-top:20px}
+.f-grid{display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:34px}
+@media(max-width:760px){.f-grid{grid-template-columns:1fr; gap:26px}}
+footer .brand{color:#fff}
+footer .brand small{color:#e7a8c6}
+footer h4{font-family:var(--display); font-weight:400; font-size:18px; color:#fff; margin:0 0 12px}
+footer a{color:#ffdfec; text-decoration:none; display:block; padding:4px 0; font-size:15px; opacity:.85}
+footer a:hover{opacity:1; color:#fff}
+.f-bottom{border-top:1px solid rgba(255,255,255,.14); margin-top:34px; padding-top:18px; text-align:center;
+  font-size:13.5px; opacity:.7}
+
+/* floating whatsapp */
+.fab{position:fixed; inset-inline-start:20px; bottom:20px; z-index:80; display:flex; align-items:center; gap:10px;
+  background:linear-gradient(135deg,#34d178,#17a35a); color:#fff; text-decoration:none; font-weight:700;
+  padding:14px 20px; border-radius:99px; box-shadow:0 14px 34px rgba(23,163,90,.42); font-size:15px;
+  transition:.28s; padding-bottom:calc(14px + env(safe-area-inset-bottom,0px))}
+.fab:hover{transform:translateY(-4px) scale(1.04)}
+.fab .pulse{position:absolute; inset:0; border-radius:99px; box-shadow:0 0 0 0 rgba(52,209,120,.6);
+  animation:pulse 2.4s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 18px rgba(52,209,120,0)}100%{box-shadow:0 0 0 0 rgba(52,209,120,0)}}
+@media(max-width:520px){.fab span.txt{display:none} .fab{padding:16px}}
+
+/* reveal */
+.rv{opacity:0; transform:translateY(30px); transition:opacity .8s ease, transform .8s cubic-bezier(.22,1,.36,1)}
+.rv.in{opacity:1; transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important}
+  .rv{opacity:1; transform:none}
+}
+</style>
+</head>
+<body class="locked">
+
+<div class="bg-wash"></div>
+<div class="bg-dots"></div>
+<div class="stickers" id="stickers" aria-hidden="true"></div>
+
+<!-- ============ INTRO ============ -->
+<div id="intro">
+  <div class="intro-inner">
+    <svg class="intro-eye" viewBox="0 0 260 150" fill="none" aria-hidden="true">
+      <g id="introLashes" stroke="#7d2b53" stroke-width="3.4" stroke-linecap="round"></g>
+      <path class="lid-top" d="M22 86 Q130 10 238 86" stroke="#7d2b53" stroke-width="4.5" stroke-linecap="round"/>
+      <path class="lid-bot" d="M22 86 Q130 134 238 86" stroke="#7d2b53" stroke-width="4.5" stroke-linecap="round"/>
+      <g class="iris">
+        <circle cx="130" cy="86" r="25" fill="#7d2b53"/>
+        <circle cx="130" cy="86" r="11" fill="#3b1024"/>
+        <circle cx="139" cy="76" r="6.5" fill="#fff" opacity=".92"/>
+        <circle cx="121" cy="93" r="3" fill="#fff" opacity=".55"/>
+      </g>
+    </svg>
+    <div class="intro-title">Lashes with Mori</div>
+    <div class="intro-sub">ה מ ב ט &nbsp;ש ל ך &nbsp;מ ד ב ר</div>
+    <button class="intro-skip" id="skipIntro">דלגי לאתר ✨</button>
+  </div>
+</div>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="nav-in">
+    <div class="brand">Lashes with Mori<small>LASH ARTIST</small></div>
+    <nav class="nav-links">
+      <a href="#services">הטיפולים</a>
+      <a href="#styles">סגנונות ריסים</a>
+      <a href="#about">עליי</a>
+      <a href="#reviews">ממליצות</a>
+      <a href="#faq">שאלות</a>
+    </nav>
+    <a class="nav-cta" href="#book">קביעת תור 💖</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="rv">
+      <span class="eyebrow">✨ סטודיו בוטיק לריסים</span>
+      <h1>מבט שאי אפשר<span class="script">to forget</span></h1>
+      <p class="lead">תוספות ריסים בעבודת יד, מותאמות אישית לצורת העין ולסגנון שלך. בלי מסקרה, בלי מאמץ — רק להתעורר יפה. 🌸</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#book">לקביעת תור עכשיו 💗</a>
+        <a class="btn btn-wa" id="heroWa" href="#" target="_blank" rel="noopener">וואטסאפ מהיר</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>שבועיים</b><span>החזקה של הסט</span></div>
+        <div class="stat"><b>30 דק׳</b><span>משך הטיפול</span></div>
+        <div class="stat"><b>תיקון חינם</b><span>עד שבוע מהטיפול</span></div>
+      </div>
+    </div>
+    <div class="hero-art rv">
+      <div class="badge-float badge-1">🎀 חומרים פרימיום</div>
+      <div class="badge-float badge-2">🛠️ תיקון חינם עד שבוע</div>
+      <div class="hero-card">
+        <div class="lash-art" data-lash="mid"></div>
+        <div class="cap">וולום בינוני — הסגנון הכי מבוקש בסטודיו</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" id="mq"></div>
+</div>
+
+<!-- ============ SERVICES ============ -->
+<section id="services">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow">💅 התפריט שלי</span>
+      <h2 class="sec-title">הטיפולים בסטודיו</h2>
+      <p class="sec-sub">כל טיפול מתחיל בייעוץ קצר — נבחר יחד עובי, אורך וקימור שמחמיאים בדיוק לך.</p>
+    </div>
+    <div class="grid g3" id="services-grid"></div>
+  </div>
+</section>
+
+<!-- ============ STYLES GALLERY ============ -->
+<section id="styles">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow">👁️ מדריך קטן</span>
+      <h2 class="sec-title">סגנונות הריסים</h2>
+      <p class="sec-sub">לא בטוחה מה מתאים לך? הצצי לסגנונות — ואני אעזור לבחור בפגישה.</p>
+    </div>
+    <div class="gal" id="gallery"></div>
+  </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="wrap about">
+    <div class="about-card rv">
+      <div class="avatar">🌸</div>
+      <h3 style="font-size:24px;color:var(--plum)">מורי</h3>
+      <p style="color:var(--plum-soft);font-size:15px;margin-top:6px">Certified Lash Artist</p>
+      <p style="margin-top:14px;font-size:15px;color:var(--plum-soft)">"בשבילי ריסים זה לא רק יופי — זה הביטחון שאת יוצאת איתו מהדלת." 💗</p>
+    </div>
+    <div class="rv">
+      <span class="eyebrow">🎀 נעים להכיר</span>
+      <h2 class="sec-title">שלום, אני מורי</h2>
+      <p class="sec-sub">מעצבת ריסים מוסמכת עם אהבה גדולה לפרטים הקטנים. הסטודיו שלי הוא מקום רגוע, נקי ומפנק — עם מוזיקה טובה, כוס קפה, ושעה שהיא כולה שלך.</p>
+      <ul class="ticks">
+        <li><i>✅</i><span>הסמכה מקצועית + השתלמויות שוטפות בטכניקות וולום</span></li>
+        <li><i>🧼</i><span>סטריליזציה מלאה, פינצטות אישיות וחומרים היפואלרגניים</span></li>
+        <li><i>🎯</i><span>התאמה אישית לצורת העין, לריס הטבעי ולאורח החיים שלך</span></li>
+        <li><i>☕</i><span>אווירה רגועה — הרבה לקוחות פשוט נרדמות בכיסא 😴</span></li>
+      </ul>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="#book">רוצה תור 🌷</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ BOOKING ============ -->
+<section id="book">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow">📅 יומן פתוח</span>
+      <h2 class="sec-title">קביעת תור</h2>
+      <p class="sec-sub">ממלאות פרטים, לוחצות שליחה — וההודעה נפתחת מוכנה אצלי בוואטסאפ. אאשר לך את התור תוך זמן קצר 💌</p>
+    </div>
+
+    <form class="book rv" id="bookForm" novalidate>
+      <div class="field full">
+        <label>איזה טיפול מעניין אותך?</label>
+        <div class="chiprow" id="svcChips"></div>
+      </div>
+      <div class="form-grid" style="margin-top:20px">
+        <div class="field">
+          <label for="f-name">שם מלא</label>
+          <input id="f-name" name="name" type="text" placeholder="לדוגמה: נועה כהן" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="f-phone">טלפון</label>
+          <input id="f-phone" name="phone" type="tel" inputmode="tel" placeholder="050-0000000" autocomplete="tel" required>
+        </div>
+        <div class="field">
+          <label for="f-date">תאריך מועדף</label>
+          <input id="f-date" name="date" type="date" required>
+        </div>
+        <div class="field">
+          <label for="f-time">שעה מועדפת</label>
+          <select id="f-time" name="time" required>
+            <option value="">בחרי שעה…</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="f-notes">הערות (לא חובה)</label>
+          <textarea id="f-notes" name="notes" placeholder="ריסים קיימים? רגישות? אורך שאת אוהבת? ספרי לי הכול ✨"></textarea>
+        </div>
+      </div>
+      <div class="form-foot">
+        <button class="btn btn-wa" type="submit">📲 שליחת בקשת תור בוואטסאפ</button>
+        <span class="note">ההודעה תיפתח בוואטסאפ לאישור לפני השליחה — 0 התחייבות.</span>
+      </div>
+      <p class="err" id="formErr" hidden></p>
+    </form>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<section id="reviews">
+  <div class="wrap">
+    <div class="center rv">
+      <span class="eyebrow">💌 מה אומרות</span>
+      <h2 class="sec-title">ממליצות עליי</h2>
+    </div>
+    <div class="grid g3" id="reviews-grid"></div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap" style="max-width:820px">
+    <div class="center rv">
+      <span class="eyebrow">❓ כל מה שרציתן לדעת</span>
+      <h2 class="sec-title">שאלות נפוצות</h2>
+    </div>
+    <div class="rv" id="faq-list" style="margin-top:34px"></div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap f-grid">
+    <div>
+      <div class="brand">Lashes with Mori<small>LASH ARTIST</small></div>
+      <p style="margin-top:14px;font-size:15px;opacity:.85;max-width:34ch">מבט מושלם מתחיל בפרטים הקטנים. מחכה לך בסטודיו 🌸</p>
+    </div>
+    <div>
+      <h4>ניווט</h4>
+      <a href="#services">הטיפולים</a>
+      <a href="#styles">סגנונות ריסים</a>
+      <a href="#book">קביעת תור</a>
+      <a href="#faq">שאלות נפוצות</a>
+    </div>
+    <div>
+      <h4>יצירת קשר</h4>
+      <a href="#" id="footWa" target="_blank" rel="noopener">💬 וואטסאפ: 053-726-6050</a>
+      <a href="tel:+972537266050">📞 חיוג ישיר</a>
+      <p style="margin-top:10px;font-size:14.5px;opacity:.8">א׳–ה׳ 09:00–20:00<br>ו׳ 09:00–13:00</p>
+    </div>
+  </div>
+  <div class="f-bottom">© <span id="yr"></span> Lashes with Mori · נבנה באהבה 💗</div>
+</footer>
+
+<a class="fab" id="fabWa" href="#" target="_blank" rel="noopener" aria-label="שליחת הודעה בוואטסאפ">
+  <span class="pulse"></span>
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.1-.7.2s-.7 1-.9 1.2c-.2.2-.3.2-.6.1s-1.2-.5-2.3-1.4c-.9-.8-1.4-1.7-1.6-2s0-.4.1-.6l.5-.6c.1-.2.2-.3.3-.5s0-.4 0-.6-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4s-1.1 1.1-1.1 2.6 1.1 3 1.3 3.2c.2.2 2.2 3.4 5.4 4.7.8.3 1.4.5 1.8.7.8.2 1.5.2 2 .1.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.4 1.3 4.9L2 22l5.3-1.3c1.4.8 3 1.2 4.7 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+  <span class="txt">דברי איתי</span>
+</a>
+
+<script>
+(function(){
+  "use strict";
+  var PHONE = "972537266050";
+  var wa = function(text){ return "https://wa.me/" + PHONE + "?text=" + encodeURIComponent(text); };
+
+  /* ---------- whatsapp links ---------- */
+  var hello = "היי מורי! 🌸 הגעתי דרך האתר ואשמח לשמוע פרטים על תוספות ריסים ✨";
+  ["heroWa","footWa","fabWa"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.href = wa(hello);
+  });
+  document.getElementById("yr").textContent = new Date().getFullYear();
+
+  /* ---------- floating stickers ---------- */
+  var emojis = ["🌸","✨","💗","🎀","🦋","🌷","💅","👁️","🫧","⭐"];
+  var box = document.getElementById("stickers"), frag = document.createDocumentFragment();
+  for (var i = 0; i < 18; i++){
+    var s = document.createElement("div");
+    s.className = "sticker";
+    s.textContent = emojis[i % emojis.length];
+    s.style.left = (Math.random()*96).toFixed(2) + "%";
+    s.style.top  = (Math.random()*100).toFixed(2) + "%";
+    s.style.fontSize = (16 + Math.random()*22).toFixed(0) + "px";
+    s.style.setProperty("--d", (10 + Math.random()*10).toFixed(1) + "s");
+    s.style.setProperty("--dl", (-Math.random()*10).toFixed(1) + "s");
+    s.style.opacity = (0.25 + Math.random()*0.4).toFixed(2);
+    frag.appendChild(s);
+  }
+  box.appendChild(frag);
+
+  /* ---------- lash SVG engine ---------- */
+  var P0 = {x:16, y:66}, P1 = {x:110, y:6}, P2 = {x:204, y:66};
+  function qp(t){ var m=1-t; return {x:m*m*P0.x+2*m*t*P1.x+t*t*P2.x, y:m*m*P0.y+2*m*t*P1.y+t*t*P2.y}; }
+  function qt(t){ var m=1-t; var x=2*m*(P1.x-P0.x)+2*t*(P2.x-P1.x), y=2*m*(P1.y-P0.y)+2*t*(P2.y-P1.y);
+    var L=Math.hypot(x,y)||1; return {x:x/L, y:y/L}; }
+  function rot(v,a){ var c=Math.cos(a), s=Math.sin(a); return {x:v.x*c-v.y*s, y:v.x*s+v.y*c}; }
+
+  var STYLES = {
+    classic: { n:26, len:function(u){ return 26 + 10*Math.sin(Math.PI*u); }, fan:1, curl:.55, w:2.1 },
+    volume:  { n:24, len:function(u){ return 27 + 12*Math.sin(Math.PI*u); }, fan:3, spread:.20, curl:.6, w:1.6 },
+    mid:     { n:25, len:function(u){ return 28 + 13*Math.sin(Math.PI*u); }, fan:4, spread:.23, curl:.6, w:1.5 },
+    mega:    { n:26, len:function(u){ return 30 + 13*Math.sin(Math.PI*u); }, fan:5, spread:.26, curl:.62, w:1.35 },
+    cat:     { n:26, len:function(u){ return 15 + 34*Math.pow(u,1.7); },     fan:2, spread:.16, curl:.5,  w:1.8 },
+    doll:    { n:26, len:function(u){ return 20 + 26*Math.sin(Math.PI*u); }, fan:2, spread:.16, curl:.7,  w:1.8 },
+    wet:     { n:22, len:function(u,i){ return (i%2 ? 20 : 36) + 6*Math.sin(Math.PI*u); }, fan:2, spread:.30, curl:.5, w:1.9 },
+    lift:    { n:30, len:function(u){ return 15 + 7*Math.sin(Math.PI*u); },  fan:1, curl:.95, w:1.9 },
+    colored: { n:24, len:function(u){ return 24 + 12*Math.sin(Math.PI*u); }, fan:2, spread:.18, curl:.6, w:1.8, tint:true }
+  };
+
+  function strand(b, dir, len, curl, sweep){
+    var tip = { x: b.x + dir.x*len + sweep.x*len*curl*0.55,
+                y: b.y + dir.y*len + sweep.y*len*curl*0.55 };
+    var ctl = { x: b.x + dir.x*len*0.62, y: b.y + dir.y*len*0.62 };
+    return "M" + b.x.toFixed(1) + " " + b.y.toFixed(1) +
+           " Q" + ctl.x.toFixed(1) + " " + ctl.y.toFixed(1) +
+           " " + tip.x.toFixed(1) + " " + tip.y.toFixed(1);
+  }
+
+  function lashSVG(key){
+    var st = STYLES[key] || STYLES.classic;
+    var d = [], tints = [];
+    for (var i = 0; i <= st.n; i++){
+      var u = i / st.n;
+      var t = 0.06 + u * 0.88;
+      var b = qp(t), tan = qt(t);
+      var nrm = { x: tan.y, y: -tan.x };                 // outward from the lid
+      var k = (u - 0.5) * 2;                          // -1 inner … 0 centre … +1 outer
+      var sweep = { x: tan.x * k, y: tan.y * k };
+      var base = st.len(u, i);
+      var fans = st.fan || 1;
+      for (var f = 0; f < fans; f++){
+        var off = fans === 1 ? 0 : (f - (fans-1)/2) * (st.spread || .18);
+        var dir = rot(nrm, off);
+        var L = base * (1 - Math.abs(off) * 0.45);
+        d.push(strand(b, dir, L, st.curl, sweep));
+        if (st.tint) tints.push(f % 3);
+      }
+    }
+    var paths = d.map(function(p, idx){
+      var stroke = st.tint ? ["#e0447f","#a45ecf","#5e8fd6"][tints[idx] % 3] : "url(#lashG)";
+      return '<path d="' + p + '" stroke="' + stroke + '" stroke-width="' + st.w + '" stroke-linecap="round" fill="none"/>';
+    }).join("");
+
+    return '<svg viewBox="0 -36 220 150" role="img" aria-label="איור ריסים" style="display:block;width:100%;height:auto">' +
+      '<defs>' +
+        '<linearGradient id="lashG" x1="0" y1="1" x2="0" y2="0">' +
+          '<stop offset="0%" stop-color="#5f2440"/><stop offset="100%" stop-color="#c2477d"/>' +
+        '</linearGradient>' +
+        '<radialGradient id="irisG"><stop offset="0%" stop-color="#7b3055"/><stop offset="100%" stop-color="#4a1731"/></radialGradient>' +
+      '</defs>' +
+      '<ellipse cx="110" cy="66" rx="88" ry="24" fill="#ffe9f1"/>' +
+      paths +
+      '<path d="M16 66 Q110 6 204 66" stroke="#5f2440" stroke-width="3.4" fill="none" stroke-linecap="round"/>' +
+      '<path d="M16 66 Q110 104 204 66" stroke="#5f2440" stroke-width="3" fill="none" stroke-linecap="round"/>' +
+      '<circle cx="110" cy="62" r="19" fill="url(#irisG)"/>' +
+      '<circle cx="110" cy="62" r="8" fill="#2c0c1c"/>' +
+      '<circle cx="117" cy="55" r="5" fill="#fff" opacity=".9"/>' +
+      '<circle cx="103" cy="68" r="2.3" fill="#fff" opacity=".55"/>' +
+      '<path d="M40 88 q6 -5 12 0" stroke="#ffb3cd" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/>' +
+      '<text x="192" y="-14" font-size="16" opacity=".85">✨</text>' +
+    '</svg>';
+  }
+
+  /* ---------- intro eye lashes ---------- */
+  (function introLashes(){
+    var g = document.getElementById("introLashes");
+    if (!g) return;
+    var a0={x:22,y:86}, a1={x:130,y:10}, a2={x:238,y:86}, out = "";
+    for (var i = 1; i < 22; i++){
+      var t = i/22, m = 1-t;
+      var x = m*m*a0.x + 2*m*t*a1.x + t*t*a2.x;
+      var y = m*m*a0.y + 2*m*t*a1.y + t*t*a2.y;
+      var dx = 2*m*(a1.x-a0.x) + 2*t*(a2.x-a1.x);
+      var dy = 2*m*(a1.y-a0.y) + 2*t*(a2.y-a1.y);
+      var L = Math.hypot(dx,dy)||1; dx/=L; dy/=L;
+      var nx = dy, ny = -dx;
+      var len = 16 + 12*Math.sin(Math.PI*t);
+      var sw = (t<.5?-1:1);
+      var tx = x + nx*len + dx*sw*len*.4, ty = y + ny*len + dy*sw*len*.4;
+      out += '<path class="lash" style="animation-delay:' + (0.5 + i*0.035).toFixed(2) + 's" d="M' +
+             x.toFixed(1) + ' ' + y.toFixed(1) + ' Q' + (x+nx*len*.6).toFixed(1) + ' ' + (y+ny*len*.6).toFixed(1) +
+             ' ' + tx.toFixed(1) + ' ' + ty.toFixed(1) + '"/>';
+    }
+    g.innerHTML = out;
+  })();
+
+  /* ---------- data ---------- */
+  var SERVICES = [
+    { key:"volume", tag:"🌿", name:"וולום עדין", price:"₪50", dur:"כ־30 דקות",
+      desc:"מניפות דקות ועדינות למראה טבעי ורענן. מושלם ליומיום ולמי שעושה ריסים בפעם הראשונה." },
+    { key:"mid", tag:"💖", name:"וולום בינוני", price:"₪70", dur:"כ־30 דקות",
+      desc:"יותר צפיפות ומילוי, ועדיין נשאר מחמיא וטבעי. האיזון המושלם — והכי מבוקש בסטודיו." },
+    { key:"mega", tag:"👑", name:"מגה וולום", price:"₪100", dur:"כ־30 דקות",
+      desc:"מניפות עשירות למראה מלא ועוצמתי. לאירועים, לצילומים, ולמי שאוהבת שיסתכלו." }
+  ];
+
+  var GALLERY = [
+    { key:"classic", name:"קלאסי טבעי" },
+    { key:"volume",  name:"וולום 3D" },
+    { key:"mega",    name:"מגה וולום" },
+    { key:"cat",     name:"Cat Eye" },
+    { key:"doll",    name:"Doll Eye" },
+    { key:"wet",     name:"Wet Look" },
+    { key:"mid",     name:"וולום בינוני" },
+    { key:"colored", name:"ריסים צבעוניים" }
+  ];
+
+  var REVIEWS = [
+    { t:"מורי פשוט אמנית. יצאתי עם ריסים שנראים כאילו נולדתי איתם, וכולן שואלות אותי איפה עשיתי 😍", w:"שיר ל׳" },
+    { t:"חצי שעה ויצאתי מהסטודיו אחרת לגמרי. נשר לי ריס אחרי כמה ימים ומורי תיקנה בלי לחשוב פעמיים 🙏", w:"דנה מ׳" },
+    { t:"עשיתי אצלה ריסים לחתונה שלי והן החזיקו בול לאורך כל הערב. שירות מתוק, מקצועי ונקי.", w:"אור ב׳" }
+  ];
+
+  var FAQ = [
+    { q:"כמה זמן הריסים מחזיקים?", a:"הסט מחזיק כשבועיים. אחרי זה, בגלל מחזור הצמיחה הטבעי של הריס, מומלץ לקבוע תור לסט חדש." },
+    { q:"ומה אם משהו מתקלקל?", a:"אם תוך שבוע מהטיפול נשרו ריסים או שמשהו לא יושב טוב — מתקנת בחינם, בלי שאלות. פשוט שלחי לי הודעה בוואטסאפ ונקבע 💗" },
+    { q:"זה מזיק לריסים הטבעיים?", a:"ממש לא, כשזה נעשה נכון. אני עובדת בהדבקה ריס-על-ריס עם משקל מותאם לריס הטבעי שלך, כך שהוא ממשיך לגדול ולנשור באופן תקין." },
+    { q:"איך מתכוננות לטיפול?", a:"להגיע עם עיניים נקיות לגמרי — בלי איפור, בלי שמנים ובלי עדשות מגע. מומלץ גם לא להרטיב את הריסים 24 שעות אחרי." },
+    { q:"כמה זמן לוקח הטיפול?", a:"כחצי שעה בלבד — אפשר בקלות לשלב את זה באמצע היום ☕" },
+    { q:"אפשר לאפר מעל?", a:"אפשר, אבל רק עם מוצרים על בסיס מים ובלי מסקרה על הריסים עצמם — זה מקצר משמעותית את חיי הסט." },
+    { q:"מה מדיניות הביטולים?", a:"אפשר לבטל או להזיז תור עד 24 שעות מראש בוואטסאפ, בלי שום עלות. ביטול מאוחר יותר עלול להיחשב כתור שנוצל." }
+  ];
+
+  /* ---------- render ---------- */
+  document.getElementById("services-grid").innerHTML = SERVICES.map(function(s){
+    return '<article class="card rv">' +
+      '<span class="sticker-tag">' + s.tag + '</span>' +
+      '<div class="lash-art">' + lashSVG(s.key) + '</div>' +
+      '<h3>' + s.name + '</h3><p>' + s.desc + '</p>' +
+      '<div class="meta"><span class="price">' + s.price + '</span><span class="dur">' + s.dur + '</span></div>' +
+    '</article>';
+  }).join("");
+
+  document.getElementById("gallery").innerHTML = GALLERY.map(function(g){
+    return '<figure class="rv"><div class="lash-art">' + lashSVG(g.key) + '</div>' +
+           '<figcaption>' + g.name + '</figcaption></figure>';
+  }).join("");
+
+  document.getElementById("reviews-grid").innerHTML = REVIEWS.map(function(r){
+    return '<div class="quote rv"><div class="stars">★★★★★</div><p>' + r.t + '</p>' +
+           '<div class="who">— ' + r.w + '</div></div>';
+  }).join("");
+
+  document.getElementById("faq-list").innerHTML = FAQ.map(function(f){
+    return '<details><summary>' + f.q + '</summary><p>' + f.a + '</p></details>';
+  }).join("");
+
+  document.getElementById("mq").innerHTML = (function(){
+    var items = ["תוספות ריסים","✨","וולום עדין","🎀","וולום בינוני","🌸","מגה וולום","💗","30 דקות בלבד","🦋","תיקון חינם עד שבוע","🌷"];
+    var one = items.map(function(i){ return "<span>" + i + "</span>"; }).join("");
+    return one + one;
+  })();
+
+  /* ---------- hero art ---------- */
+  document.querySelectorAll("[data-lash]").forEach(function(el){
+    el.innerHTML = lashSVG(el.getAttribute("data-lash"));
+  });
+
+  /* ---------- booking form ---------- */
+  var chips = document.getElementById("svcChips");
+  var chosen = SERVICES[1].name;
+  chips.innerHTML = SERVICES.map(function(s, i){
+    return '<button type="button" class="chip' + (i===1 ? " on" : "") + '" data-name="' + s.name + '">' +
+           s.tag + " " + s.name + '</button>';
+  }).join("");
+  chips.addEventListener("click", function(e){
+    var b = e.target.closest(".chip"); if (!b) return;
+    chips.querySelectorAll(".chip").forEach(function(c){ c.classList.remove("on"); });
+    b.classList.add("on");
+    chosen = b.dataset.name;
+  });
+
+  var timeSel = document.getElementById("f-time");
+  for (var h = 9; h <= 19; h++){
+    [0,30].forEach(function(m){
+      if (h === 19 && m === 30) return;
+      var v = (h<10?"0":"") + h + ":" + (m===0 ? "00" : "30");
+      var o = document.createElement("option"); o.value = v; o.textContent = v;
+      timeSel.appendChild(o);
+    });
+  }
+
+  var dateEl = document.getElementById("f-date");
+  var today = new Date(); today.setHours(0,0,0,0);
+  var iso = function(d){ return d.toISOString().slice(0,10); };
+  var tz = new Date(today.getTime() - today.getTimezoneOffset()*60000);
+  dateEl.min = tz.toISOString().slice(0,10);
+
+  var errEl = document.getElementById("formErr");
+  document.getElementById("bookForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    var name = document.getElementById("f-name").value.trim();
+    var phone = document.getElementById("f-phone").value.trim();
+    var date = dateEl.value;
+    var time = timeSel.value;
+    var notes = document.getElementById("f-notes").value.trim();
+
+    var missing = [];
+    if (!name) missing.push("שם");
+    if (!phone) missing.push("טלפון");
+    if (!date) missing.push("תאריך");
+    if (!time) missing.push("שעה");
+    if (missing.length){
+      errEl.hidden = false;
+      errEl.textContent = "רגע 💕 חסר למלא: " + missing.join(", ");
+      errEl.scrollIntoView({behavior:"smooth", block:"center"});
+      return;
+    }
+    errEl.hidden = true;
+
+    var pretty = date.split("-").reverse().join("/");
+    var msg = "היי מורי! 🌸 אשמח לקבוע תור דרך האתר:\n\n" +
+      "👩 שם: " + name + "\n" +
+      "📞 טלפון: " + phone + "\n" +
+      "💅 טיפול: " + chosen + "\n" +
+      "📅 תאריך: " + pretty + "\n" +
+      "⏰ שעה: " + time + "\n" +
+      (notes ? "📝 הערות: " + notes + "\n" : "") +
+      "\nתודה! ✨";
+    window.open(wa(msg), "_blank", "noopener");
+  });
+
+  /* ---------- reveal on scroll ---------- */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+    });
+  }, { threshold:.12, rootMargin:"0px 0px -40px 0px" });
+  document.querySelectorAll(".rv").forEach(function(el, i){
+    el.style.transitionDelay = ((i % 3) * 0.09) + "s";
+    io.observe(el);
+  });
+
+  /* ---------- intro dismiss ---------- */
+  var intro = document.getElementById("intro");
+  var closed = false;
+  function closeIntro(){
+    if (closed) return; closed = true;
+    intro.classList.add("done");
+    document.body.classList.remove("locked");
+    setTimeout(function(){ intro.remove(); }, 900);
+  }
+  document.getElementById("skipIntro").addEventListener("click", closeIntro);
+  intro.addEventListener("click", closeIntro);
+  setTimeout(closeIntro, 4200);
+})();
+</script>
+</body>
+</html>
