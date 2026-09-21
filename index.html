@@ -226,6 +226,7 @@ input[type=tel]::placeholder{text-align:right}
 .form-foot{display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:24px}
 .note{font-size:13.5px; color:var(--plum-soft)}
 .err{color:#c0275f; font-size:13.5px; font-weight:500}
+.hint{font-size:13px; color:var(--plum-soft)}
 
 /* testimonials */
 .quote{background:#fff; border:1px solid var(--pink-150); border-radius:var(--r); padding:26px;
@@ -434,7 +435,7 @@ footer a:hover{opacity:1; color:#fff}
 <section id="book">
   <div class="wrap">
     <div class="center rv">
-      <span class="eyebrow">📅 יומן פתוח</span>
+      <span class="eyebrow">📅 א׳–ה׳ 15:00–20:30 · ו׳–ש׳ 10:00–18:00</span>
       <h2 class="sec-title">קביעת תור</h2>
       <p class="sec-sub">ממלאות פרטים, לוחצות שליחה — וההודעה נפתחת מוכנה אצלי בוואטסאפ. אאשר לך את התור ואשלח את הכתובת בקריית אונו 💌</p>
     </div>
@@ -460,8 +461,9 @@ footer a:hover{opacity:1; color:#fff}
         <div class="field">
           <label for="f-time">שעה מועדפת</label>
           <select id="f-time" name="time" required>
-            <option value="">בחרי שעה…</option>
+            <option value="">בחרי קודם תאריך…</option>
           </select>
+          <small class="hint" id="hoursHint">א׳–ה׳ 15:00–20:30 · ו׳–ש׳ 10:00–18:00</small>
         </div>
         <div class="field full">
           <label for="f-notes">הערות (לא חובה)</label>
@@ -519,7 +521,7 @@ footer a:hover{opacity:1; color:#fff}
       <a href="tel:+972537266050">📞 חיוג ישיר</a>
       <p style="margin-top:8px;font-size:15px;opacity:.85">📍 קריית אונו · הכתובת המדויקת נשלחת בוואטסאפ</p>
       <p style="margin-top:8px;font-size:15px;opacity:.85">💳 ביט · פייבוקס · מזומן</p>
-      <p style="margin-top:10px;font-size:14.5px;opacity:.8">א׳–ה׳ 09:00–20:00<br>ו׳ 09:00–13:00</p>
+      <p style="margin-top:10px;font-size:14.5px;opacity:.8">🕒 א׳–ה׳ 15:00–20:30<br>ו׳–ש׳ 10:00–18:00</p>
     </div>
   </div>
   <div class="f-bottom">© <span id="yr"></span> Lashes with Mori · נבנה באהבה 💗</div>
@@ -748,20 +750,42 @@ footer a:hover{opacity:1; color:#fff}
   });
 
   var timeSel = document.getElementById("f-time");
-  for (var h = 9; h <= 19; h++){
-    [0,30].forEach(function(m){
-      if (h === 19 && m === 30) return;
-      var v = (h<10?"0":"") + h + ":" + (m===0 ? "00" : "30");
-      var o = document.createElement("option"); o.value = v; o.textContent = v;
-      timeSel.appendChild(o);
-    });
+  var hint = document.getElementById("hoursHint");
+  var dateEl = document.getElementById("f-date");
+
+  // Sun-Thu afternoons, Fri-Sat daytime. Minutes from midnight.
+  var WEEK    = { open: 15*60, close: 20*60 + 30, label: "א׳–ה׳ · 15:00–20:30" };
+  var WEEKEND = { open: 10*60, close: 18*60,      label: "ו׳–ש׳ · 10:00–18:00" };
+
+  function hoursFor(dateStr){
+    var day = new Date(dateStr + "T00:00:00").getDay();   // 0 = Sunday, 5 = Fri, 6 = Sat
+    return (day === 5 || day === 6) ? WEEKEND : WEEK;
+  }
+  function hhmm(mins){
+    return ("0" + Math.floor(mins / 60)).slice(-2) + ":" + ("0" + (mins % 60)).slice(-2);
+  }
+  function fillTimes(){
+    var keep = timeSel.value;
+    timeSel.innerHTML = "";
+    if (!dateEl.value){
+      timeSel.appendChild(new Option("בחרי קודם תאריך…", ""));
+      hint.textContent = "א׳–ה׳ 15:00–20:30 · ו׳–ש׳ 10:00–18:00";
+      return;
+    }
+    var w = hoursFor(dateEl.value);
+    timeSel.appendChild(new Option("בחרי שעה…", ""));
+    for (var m = w.open; m <= w.close; m += 30){
+      timeSel.appendChild(new Option(hhmm(m), hhmm(m)));
+    }
+    timeSel.value = keep;                 // keep the choice if it still exists
+    hint.textContent = "שעות הפעילות ביום שבחרת: " + w.label;
   }
 
-  var dateEl = document.getElementById("f-date");
-  var today = new Date(); today.setHours(0,0,0,0);
-  var iso = function(d){ return d.toISOString().slice(0,10); };
-  var tz = new Date(today.getTime() - today.getTimezoneOffset()*60000);
-  dateEl.min = tz.toISOString().slice(0,10);
+  var today = new Date();
+  dateEl.min = new Date(today.getTime() - today.getTimezoneOffset()*60000)
+                 .toISOString().slice(0,10);
+  dateEl.addEventListener("change", fillTimes);
+  fillTimes();
 
   var errEl = document.getElementById("formErr");
   document.getElementById("bookForm").addEventListener("submit", function(e){
